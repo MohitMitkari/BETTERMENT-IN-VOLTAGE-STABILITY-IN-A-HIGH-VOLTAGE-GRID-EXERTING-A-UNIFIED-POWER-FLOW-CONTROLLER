@@ -1,0 +1,10 @@
+s = tf('s');
+Tw=4;
+G =(1-exp(-Tw*s))/(Tw*s)  % This creates a state space model for your system
+Ga = pade(G,2); % Make a rational system using pade approximation for transport delay
+[den, num] = ss2tf(Ga.a, Ga.b, Ga.c, Ga.d); % Obtain numerator and denominator of pade approximated system
+Gtf = tf(num, den) %Transfer function of system with time delays approxim
+A=Ga.A
+B=Ga.B
+C=Ga.C
+D=Ga.D
